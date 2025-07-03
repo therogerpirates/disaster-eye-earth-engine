@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Geospatial Analysis Tool Design System - Earth & Environmental Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Earth-inspired color palette */
+    --background: 210 25% 8%;
+    --foreground: 180 15% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 22% 12%;
+    --card-foreground: 180 15% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 22% 12%;
+    --popover-foreground: 180 15% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Ocean blue primary */
+    --primary: 200 85% 45%;
+    --primary-foreground: 210 25% 8%;
+    --primary-glow: 200 85% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Forest green secondary */
+    --secondary: 150 40% 25%;
+    --secondary-foreground: 150 30% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted earth tones */
+    --muted: 210 15% 18%;
+    --muted-foreground: 180 10% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent highlighting */
+    --accent: 45 85% 55%;
+    --accent-foreground: 210 25% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Warning/alert colors */
+    --destructive: 10 75% 55%;
+    --destructive-foreground: 210 25% 95%;
+    
+    --warning: 35 85% 60%;
+    --warning-foreground: 210 25% 8%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Interface elements */
+    --border: 210 15% 20%;
+    --input: 210 15% 16%;
+    --ring: 200 85% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom gradients for environmental feel */
+    --gradient-ocean: linear-gradient(135deg, hsl(200 85% 45%), hsl(220 70% 50%));
+    --gradient-earth: linear-gradient(135deg, hsl(150 40% 25%), hsl(120 35% 30%));
+    --gradient-atmosphere: linear-gradient(180deg, hsl(210 25% 8%), hsl(210 22% 12%));
+    --gradient-data: linear-gradient(90deg, hsl(200 85% 45% / 0.1), hsl(150 40% 25% / 0.1));
+    
+    /* Shadows with environmental glow */
+    --shadow-ocean: 0 10px 30px -5px hsl(200 85% 45% / 0.3);
+    --shadow-earth: 0 8px 25px -5px hsl(150 40% 25% / 0.4);
+    --shadow-elevation: 0 20px 40px -10px hsl(210 25% 4% / 0.8);
+    
+    /* Animation timing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-data: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --sidebar-background: 0 0% 98%;
 
