@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-07-03T13:44:26.562300",
+  "earth_engine_status": "connected",
+  "map_data": {
+    "center": {
+      "lat": 11.0168,
+      "lng": 76.9558
+    },
+    "zoom": 10,
+    "elevation_url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/b2d9355d26387ce2998f28503cfeb1c0-55a2cf0680d30dac0d540928e31449a5/tiles/{z}/{x}/{y}",
+    "flood_risk_url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/0714b84df2fd78d94aceb6912c85b41c-b123cf7c8ed774131c2c9a483342658f/tiles/{z}/{x}/{y}",
+    "precipitation_url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/75f39c3093845dc6baaa6550597d827d-e084f690f0daa662b4739d131afe8cec/tiles/{z}/{x}/{y}",
+    "sample_data": {
+      "elevation": 432,
+      "flood_risk": 1,
+      "slope": 0.9448183178901672
+    }
+  },
+  "backend_analysis": {
+    "coordinates": {
+      "lat": 11.0168,
+      "lng": 76.9558
+    },
+    "timestamp": "2025-07-03T13:44:24.022228",
+    "status": "completed",
+    "flood_analysis": {
+      "error": "Earth Engine not initialized"
+    },
+    "building_analysis": {
+      "error": "Earth Engine not initialized"
+    },
+    "social_vulnerability": {
+      "score": 0.2,
+      "category": "Low",
+      "factors": {
+        "flood_risk": 0,
+        "building_density": 0,
+        "elevation_risk": 0,
+        "infrastructure_access": 1.0
+      },
+      "description": "Social vulnerability is low based on flood risk, building density, and elevation factors."
+    },
+    "ai_analysis": {
+      "intent": "flood_analysis",
+      "ai_response": "Analyzing flood vulnerability using satellite data and elevation models. This includes water detection from SAR imagery and topographic analysis.",
+      "confidence": 0.7,
+      "suggested_actions": [
+        "View flood risk zones on map",
+        "Check historical flood data",
+        "Analyze drainage patterns",
+        "Assess elevation vulnerability"
+      ]
+    },
+    "report": "\n**Flood Risk Assessment:**\n- Current flood coverage: 0.0%\n- Average elevation: 0.0m\n- Risk level: Unknown\n\n\n**Building Damage Assessment:**\n- Estimated buildings: 0\n- Potentially damaged: 0\n- Damage rate: 0.0%\n\n\n**Analysis Location:**\n- Coordinates: 11.0168, 76.9558\n- Analysis performed: 2025-07-03T13:44:24.022228\n"
+  },
+  "sample_layers": {
+    "population": {
+      "name": "Population Density",
+      "url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/e377ee499ef7acdddd53b656f3c87e05-48d98ab287654f235c2a70e94a3e3b46/tiles/{z}/{x}/{y}",
+      "description": "Population density per 100m grid"
+    },
+    "infrastructure": {
+      "name": "Night Lights (Infrastructure)",
+      "url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/7494dc03bf5963c2d393c36a7fc2d9b6-f7fbab75bddf7a5d95c4bec7ba0e465a/tiles/{z}/{x}/{y}",
+      "description": "Night-time lights indicating infrastructure"
+    },
+    "urban": {
+      "name": "Urban Areas",
+      "url": "https://earthengine.googleapis.com/v1/projects/omega-bearing-464216-i7/maps/aef715da12da33d3f4923f01e7f0bd82-ffc618bd909e0d03e825e82cc8bb123a/tiles/{z}/{x}/{y}",
+      "description": "Urban and built-up areas"
+    }
+  },
+  "test_location": {
+    "name": "Coimbatore, Tamil Nadu",
+    "coordinates": {
+      "lat": 11.0168,
+      "lng": 76.9558
+    },
+    "description": "ISRO headquarters region"
+  }
+}

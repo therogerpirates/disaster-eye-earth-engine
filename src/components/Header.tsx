@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
@@ -31,6 +32,11 @@ const Header: React.FC = () => {
             <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
               Real-time Data
             </Badge>
+            <Link to="/earth-engine-demo">
+              <Button variant="outline" size="sm">
+                EE Demo
+              </Button>
+            </Link>
             <Button variant="outline" size="sm">
               Settings
             </Button>

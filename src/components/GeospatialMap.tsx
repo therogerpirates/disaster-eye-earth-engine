@@ -1,25 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Layers, ZoomIn, ZoomOut, MousePointer, Square, Download, Share } from 'lucide-react';
+import { Layers, ZoomIn, ZoomOut, MousePointer, Square, Download, Share, Satellite } from 'lucide-react';
+import { apiService } from '@/services/api';
+import InteractiveMap from './InteractiveMap';
 
 interface GeospatialMapProps {
   onLayerToggle?: (layer: string) => void;
   activeLayer?: string;
   onMapClick?: (coordinates: { lat: number; lng: number }) => void;
+  backendStatus?: 'checking' | 'available' | 'unavailable';
 }
 
-const GeospatialMap: React.FC<GeospatialMapProps> = ({ onLayerToggle, activeLayer, onMapClick }) => {
+const GeospatialMap: React.FC<GeospatialMapProps> = ({ onLayerToggle, activeLayer, onMapClick, backendStatus = 'checking' }) => {
   const [selectedTool, setSelectedTool] = useState<'select' | 'draw'>('select');
   const [clickedLocation, setClickedLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapLayers, setMapLayers] = useState<any>(null);
+  const [isLoadingLayers, setIsLoadingLayers] = useState(false);
 
   const layers = [
-    { id: 'flood-zones', name: 'Flood Zones', color: 'hsl(var(--destructive))', description: 'High/Medium/Low Risk Areas' },
-    { id: 'buildings', name: 'Building Footprints', color: 'hsl(var(--accent))', description: 'Infrastructure Outlines' },
-    { id: 'svi', name: 'Social Vulnerability', color: 'hsl(var(--warning))', description: 'Community Risk Index' },
-    { id: 'infrastructure', name: 'Critical Infrastructure', color: 'hsl(var(--primary))', description: 'Hospitals, Schools, Power' }
+    { id: 'flood-zones', name: 'Flood Zones', color: 'hsl(var(--destructive))', description: 'High/Medium/Low Risk Areas', source: 'Earth Engine' },
+    { id: 'buildings', name: 'Building Footprints', color: 'hsl(var(--accent))', description: 'Infrastructure Outlines', source: 'Earth Engine' },
+    { id: 'svi', name: 'Social Vulnerability', color: 'hsl(var(--warning))', description: 'Community Risk Index', source: 'Earth Engine' },
+    { id: 'infrastructure', name: 'Critical Infrastructure', color: 'hsl(var(--primary))', description: 'Hospitals, Schools, Power', source: 'Earth Engine' }
   ];
+
+  // Load Earth Engine map layers when component mounts
+  useEffect(() => {
+    if (backendStatus === 'available' && clickedLocation) {
+      loadMapLayers(clickedLocation.lat, clickedLocation.lng);
+    }
+  }, [backendStatus, clickedLocation]);
+
+  const loadMapLayers = async (lat: number, lng: number) => {
+    setIsLoadingLayers(true);
+    try {
+      const layers = await apiService.getMapLayers(lat, lng, 12);
+      setMapLayers(layers);
+    } catch (error) {
+      console.error('Failed to load Earth Engine map layers:', error);
+    } finally {
+      setIsLoadingLayers(false);
+    }
+  };
 
   const handleMapClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (selectedTool === 'select') {
@@ -48,10 +72,31 @@ const GeospatialMap: React.FC<GeospatialMapProps> = ({ onLayerToggle, activeLaye
         <div className="flex items-center justify-center h-full">
           <div className="text-center p-8">
             <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-ocean flex items-center justify-center animate-pulse-glow">
-              <Layers className="w-12 h-12 text-white" />
+              <Satellite className="w-12 h-12 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Google Earth Engine Map</h3>
-            <p className="text-muted-foreground text-sm max-w-sm">
+            <h3 className="text-2xl font-bold text-white mb-2">
+              {backendStatus === 'available' ? 'Earth Engine Live View' : 'Mock Geospatial View'}
+            </h3>
+            <p className="text-blue-100 mb-4">
+              {backendStatus === 'available' 
+                ? 'Real-time satellite imagery and analysis layers'
+                : 'Click anywhere to simulate location analysis'
+              }
+            </p>
+            
+            {/* Status Indicators */}
+            <div className="flex justify-center gap-2 mb-4">
+              <Badge variant="outline" className="bg-white/10 text-white border-white/30">
+                {backendStatus === 'available' ? '🛰️ Live Data' : '📍 Mock Mode'}
+              </Badge>
+              {isLoadingLayers && (
+                <Badge variant="outline" className="bg-blue-500/20 text-blue-200 border-blue-400/30">
+                  Loading Layers...
+                </Badge>
+              )}
+            </div>
+            
+            <p className="text-blue-100 text-sm max-w-sm">
               Interactive geospatial visualization • Click anywhere to query flood vulnerability
             </p>
           </div>
