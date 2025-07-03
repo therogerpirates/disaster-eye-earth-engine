@@ -37,18 +37,18 @@ const DataPanel: React.FC<DataPanelProps> = ({ title, data }) => {
   };
 
   return (
-    <Card className="bg-card/95 backdrop-blur-sm border-border/50 shadow-earth">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-base text-foreground flex items-center justify-between">
-          {title}
+    <div className="bg-transparent border-none shadow-none">
+      <div className="px-6 py-5">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-base font-medium text-foreground">{title}</span>
           {data?.analysisComplete && (
             <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
               Complete
             </Badge>
           )}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+        </div>
+        
+        <div className="space-y-4">
         {data ? (
           <>
             {/* Building Damage Stats */}
@@ -132,8 +132,9 @@ const DataPanel: React.FC<DataPanelProps> = ({ title, data }) => {
             </p>
           </div>
         )}
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 

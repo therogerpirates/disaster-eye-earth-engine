@@ -56,34 +56,49 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-atmosphere">
-      <div className="container mx-auto p-4 space-y-4">
-        {/* Header */}
-        <Header />
-        
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-[calc(100vh-120px)]">
-          {/* Left Sidebar - Controls and Query */}
-          <div className="lg:col-span-1 space-y-4">
-            <QueryInterface 
-              onQuery={handleQuery}
-              isLoading={isAnalyzing}
-              selectedLocation={selectedLocation}
-            />
-            
-            <DataPanel 
-              title={currentQuery || "Analysis Results"}
-              data={analysisData}
-            />
-          </div>
-          
-          {/* Main Map Area */}
-          <div className="lg:col-span-3">
-            <GeospatialMap 
-              onLayerToggle={handleLayerToggle}
-              activeLayer={activeLayer}
-              onMapClick={handleMapClick}
-            />
+    <div className="min-h-screen bg-gradient-atmosphere relative overflow-hidden">
+      {/* Fullscreen Map Background */}
+      <div className="absolute inset-0">
+        <GeospatialMap 
+          onLayerToggle={handleLayerToggle}
+          activeLayer={activeLayer}
+          onMapClick={handleMapClick}
+        />
+      </div>
+
+      {/* Floating Header Overlay */}
+      <div className="absolute top-4 left-4 right-4 z-10">
+        <div className="bg-card/80 backdrop-blur-md border border-border/30 rounded-xl shadow-elevation">
+          <Header />
+        </div>
+      </div>
+
+      {/* Floating Query Interface - Top Left */}
+      <div className="absolute top-24 left-4 z-10 w-96 max-w-[calc(100vw-2rem)]">
+        <div className="bg-card/85 backdrop-blur-md border border-border/30 rounded-xl shadow-elevation">
+          <QueryInterface 
+            onQuery={handleQuery}
+            isLoading={isAnalyzing}
+            selectedLocation={selectedLocation}
+          />
+        </div>
+      </div>
+
+      {/* Floating Data Panel - Bottom Left */}
+      <div className="absolute bottom-4 left-4 z-10 w-80 max-w-[calc(100vw-2rem)]">
+        <div className="bg-card/85 backdrop-blur-md border border-border/30 rounded-xl shadow-elevation">
+          <DataPanel 
+            title={currentQuery || "Analysis Results"}
+            data={analysisData}
+          />
+        </div>
+      </div>
+
+      {/* Mobile Responsive Adjustments */}
+      <div className="lg:hidden absolute top-20 right-4 z-10">
+        <div className="bg-card/90 backdrop-blur-md border border-border/30 rounded-lg p-2">
+          <div className="text-xs text-muted-foreground text-center">
+            Tap map to query
           </div>
         </div>
       </div>

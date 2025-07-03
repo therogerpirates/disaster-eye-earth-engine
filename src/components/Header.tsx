@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 
 const Header: React.FC = () => {
   return (
-    <Card className="bg-gradient-atmosphere border-border/50 shadow-elevation">
+    <div className="bg-transparent border-none shadow-none">
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
