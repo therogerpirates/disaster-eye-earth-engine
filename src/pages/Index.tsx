@@ -9,6 +9,7 @@ const Index = () => {
   const [currentQuery, setCurrentQuery] = useState<string>('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisData, setAnalysisData] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
 
   const handleQuery = async (query: string) => {
     setCurrentQuery(query);
@@ -50,6 +51,10 @@ const Index = () => {
     setActiveLayer(activeLayer === layer ? '' : layer);
   };
 
+  const handleMapClick = (coordinates: { lat: number; lng: number }) => {
+    setSelectedLocation(coordinates);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-atmosphere">
       <div className="container mx-auto p-4 space-y-4">
@@ -63,6 +68,7 @@ const Index = () => {
             <QueryInterface 
               onQuery={handleQuery}
               isLoading={isAnalyzing}
+              selectedLocation={selectedLocation}
             />
             
             <DataPanel 
@@ -76,6 +82,7 @@ const Index = () => {
             <GeospatialMap 
               onLayerToggle={handleLayerToggle}
               activeLayer={activeLayer}
+              onMapClick={handleMapClick}
             />
           </div>
         </div>
